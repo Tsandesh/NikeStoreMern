@@ -31,8 +31,8 @@ app.post("/api/create-checkout-session", async (req, res) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    success_url: `${process.env.CLIENT_URL}/sucess`,
-    cancel_url: `${process.env.CLIENT_URL}/cancel`,
+    success_url: `https://nike-store-mern.vercel.app/sucess`,
+    cancel_url: `https://nike-store-mern.vercel.app//cancel`,
   });
 
   res.json({ id: session.id });
