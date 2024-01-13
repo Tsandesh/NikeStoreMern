@@ -65,7 +65,10 @@ const CartSlice = createSlice({
     },
     setClearCartItems: (state, action) => {
       state.cartItems = [];
-      toast.success("Cart Cleared");
+
+      toast.success(
+        action?.payload === "payment" ? "Lets Shop More :)" : "Cart Cleared"
+      );
       localStorage.setItem("cart", JSON.stringify(state.cartItems));
     },
     setGetTotals: (state, action) => {

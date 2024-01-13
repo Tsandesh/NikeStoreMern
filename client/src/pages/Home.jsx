@@ -7,7 +7,7 @@ import {
   Stories,
   Navbar,
   Cart,
-} from "./components/index";
+} from "../components/index";
 import {
   heroapi,
   popularsales,
@@ -16,13 +16,11 @@ import {
   sneaker,
   story,
   footerAPI,
-} from "./data/data.js";
+} from "../data/data.js";
 
-const App = () => {
+const Home = () => {
   return (
     <>
-      <Navbar />
-      <Cart />
       <main className="flex flex-col gap-16 relative">
         <Hero heroapi={heroapi} />
         <Sales endpoint={popularsales} ifExists />
@@ -31,9 +29,8 @@ const App = () => {
         <FlexContent endpoint={sneaker} />
         <Stories story={story} />
       </main>
-      <Footer footerAPI={footerAPI} />
     </>
   );
 };
 
-export default App;
+export default Home;

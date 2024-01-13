@@ -14,6 +14,7 @@ import {
   setOpenCart,
 } from "../app/CartSlice";
 import { useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -33,9 +34,39 @@ const Cart = () => {
       })
     );
   };
-  const onClearCartItems = () => {
-    dispatch(setClearCartItems());
+  const onClearCartItems = (payment) => {
+    dispatch(setClearCartItems(payment ? payment : ""));
   };
+
+  // Payment Integration
+  async function makePayment() {
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_KEY);
+    const body = {
+      products: cartItems,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND}api/create-checkout-session`,
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session?.id,
+    });
+    if (result?.error) {
+      console.log(result?.error);
+    } else {
+      onClearCartItems("payment");
+    }
+  }
   return (
     <>
       <div
@@ -76,6 +107,7 @@ const Cart = () => {
                   <button
                     type="button"
                     className="button-theme bg-theme-cart text-white"
+                    onClick={makePayment}
                   >
                     Check Out
                   </button>

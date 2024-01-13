@@ -7,8 +7,10 @@ import {
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
 import { selectTotalQTY, setOpenCart } from "../app/CartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [navState, setNavState] = useState(false);
   const dispatch = useDispatch();
   const totalQTY = useSelector(selectTotalQTY);
@@ -45,8 +47,8 @@ const Navbar = () => {
             : "fixed top-0 left-0 right-0 h-[9vh] flex items-center justify-center opacity-100 blur-effect-theme z-[200]"
         }
       >
-        <nav className="flex items-center justify-between nike-container">
-          <div className="flex item-center">
+        <nav className="flex items-center justify-between nike-container cursor-pointer">
+          <div className="flex item-center" onClick={() => navigate("/")}>
             <img
               src={logo}
               alt="logo/img"
