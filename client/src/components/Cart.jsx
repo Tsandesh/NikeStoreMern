@@ -40,7 +40,7 @@ const Cart = () => {
 
   // Payment Integration
   async function makePayment() {
-    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_KEY);
+    const stripe = await loadStripe(`${import.meta.env.VITE_STRIPE_KEY}`);
     const body = {
       products: cartItems,
     };
