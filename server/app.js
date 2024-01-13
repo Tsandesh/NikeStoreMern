@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.use(express.json());
@@ -8,7 +9,7 @@ app.use(express.json());
 const corsOptions = {
   origin: ["https://nike-store-mern.vercel.app", "http://localhost:5173"],
 };
-
+const cors = require("cors");
 app.use(cors(corsOptions));
 
 // checkout api
