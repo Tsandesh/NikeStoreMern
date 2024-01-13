@@ -49,7 +49,7 @@ const Cart = () => {
     };
 
     const response = await fetch(
-      `${import.meta.env.VITE_BACKEND}api/create-checkout-session`,
+      `${import.meta.env.VITE_BACKEND}/api/create-checkout-session`,
       {
         method: "POST",
         headers: headers,
